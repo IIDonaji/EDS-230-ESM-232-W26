@@ -68,6 +68,8 @@ Often helpful to start at the end: **Outputs**
 *Problem*: how will forest carbon sequestration change if fire frequency increases with warming
 
 -   What might be the outputs of a model?
+    -   decrease of carbondioxide
+    -   regrowth change
 -   What might be the assumptions
 
 # Example1
@@ -79,6 +81,14 @@ Often helpful to start at the end: **Outputs**
 # Goals - Example 2
 
 *Problem*: which piece of land should be purchased to maximize biodiversity?
+
+what is the output of that model?
+
+-   number of species
+
+-   number of species per sq dollar
+
+-   
 
 # Goals - Example 2
 
@@ -108,11 +118,11 @@ This is the **MOST** important step
 
 # Inverse Inference Example {.scrollable}
 
-1. A city health department observe asthma hospitalization rates in a specific neighborhood hospital are twice as high as average rates in that state
+1.  A city health department observe asthma hospitalization rates in a specific neighborhood hospital are twice as high as average rates in that state
 
-2. An amphibian (salamander or newt) population has declined in the Santa Monica Mountains
+2.  An amphibian (salamander or newt) population has declined in the Santa Monica Mountains
 
-**Pick one** - Quickly summarize what comes to your mind as the in inverse inference (conceptual) model that leads to this finding. 
+**Pick one** - Quickly summarize what comes to your mind as the in inverse inference (conceptual) model that leads to this finding.
 
 Write your answer in Quiz Inverse Inference on Canvas - you are brainstorming here - no need to "research"
 
@@ -124,6 +134,7 @@ Write your answer in Quiz Inverse Inference on Canvas - you are brainstorming he
 Often more complicated than a simple single equation - such as a multiple regression equation
 
 \
+
 \begin{aligned}
 Pop_{\text{newt}} =\;& \beta_0 \\
 &+ \beta_1\,\text{Precipitation} \\
@@ -132,21 +143,21 @@ Pop_{\text{newt}} =\;& \beta_0 \\
 &+ \beta_4\,\text{RoadDensity} \\
 &+ \beta_5\,\text{Pollution}
 \end{aligned}
-\
 
-## Relationships and Processes 
-* Can be even more complex - what is connected with what and when
+## Relationships and Processes
 
-* What are some time-space relationships we might have to think about?
+-   Can be even more complex - what is connected with what and when
+
+-   What are some time-space relationships we might have to think about?
 
 ## Some possible extensions to conceptual model {.scrollable}
 
+Relationship between the timing of precipitation and newt lifecycle.
 
-Relationship between the timing of precipitation and newt lifecycle. 
-
-If there is a particular pollution source -  prevailing wind patterns and how long particles stay in the air
+If there is a particular pollution source - prevailing wind patterns and how long particles stay in the air
 
 \
+
 \begin{aligned}
 Pop_{\text{newt}} =\;& \beta_0 \\
 &+ \beta_1\,\text{Precipitation} \\
@@ -155,17 +166,14 @@ Pop_{\text{newt}} =\;& \beta_0 \\
 &+ \beta_4\,\text{RoadDensity} \\
 &+ \beta_5\,\text{Pollution}
 \end{aligned}
+
 \
 
-+ pollution at time lag t-1 weighted by wind direction and speed
-(model of pollution transport)
+-   pollution at time lag t-1 weighted by wind direction and speed (model of pollution transport)
 
-+ $\beta_5$ vulnerability to pollution varies with newt life stage (eggs more vulnerable than adults)
+-   $\beta_5$ vulnerability to pollution varies with newt life stage (eggs more vulnerable than adults)
 
-+ population age structure (Pop_newt_eggs, Pop_newt_juvenile, Pop_newt_adult) - all varying through time
-
-
-
+-   population age structure (Pop_newt_eggs, Pop_newt_juvenile, Pop_newt_adult) - all varying through time
 
 # Composing Diagrams
 
@@ -202,6 +210,8 @@ There are many software tools available for generating conceptual models, I like
 -   Are there features of the environment that influence the relationship between input/parameter and output?
 
 -   Are there inputs/parameters that you want to vary across cenarios (things you'd want to 'change')
+
+    -   some things may have limitations that can impact this.
 
 -   Time and Space (are you looking at a short or long terms behavior? do you care about spatial patterns? at what scale?)
 
@@ -241,8 +251,8 @@ Useful because the *type* of model will have implications for how you *build* an
 
 **Spatially distributed** - model is applied to different “patches” in space
 
-  * spatial units are independent
-  * spatial units interact with each other
+-   spatial units are independent
+-   spatial units interact with each other
 
 ![](img/spatial.001.png)
 
@@ -284,6 +294,8 @@ Think...simple bucket model
 
 # Why the type of models matters
 
+can effect the following; makes a differences when implanting it
+
 -   assumptions
 -   implementation
 -   output
@@ -293,4 +305,4 @@ Think...simple bucket model
 
 # Assignment 2 - Due Jan 13th 8am
 
-[Assignment 2]("../assignments/Assignment2_ConceptualModel.html")
+[Assignment 2](%22../assignments/Assignment2_ConceptualModel.html%22)

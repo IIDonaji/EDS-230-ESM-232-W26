@@ -22,6 +22,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
     -   Think about what an inverse inference problem might be in the context of the environment
 
+inverse inferences problem is receiving the effect but not knowing what has caused that effect. predicting based on past experiences. - environmental examples of an inverse inference is earth quakes, sonomies, climate patterns?
+
 3.  In this course, we will work a lot with writing and applying functions; You've all been exposed to writing functions in previous courses - but just to make sure that everyone remembers the basic syntax in R, complete the following:
 
 Write a function that computes energy produced from a photovoltaic system if you know the average annual solar radiation. You can use the following formula:

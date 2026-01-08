@@ -1,0 +1,40 @@
+---
+title: "Function Implementation"
+author: "Ixel"
+date: "2026-01-08"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Write a function that computes energy produced from a photovoltaic system if you know the average annual solar radiation. You can use the following formula:
+
+The energy produced by a solar panel system is given by
+
+$$
+E = A \cdot r \cdot H \cdot PR
+$$
+where:
+
+-   $E$ is the energy produced (kWh),
+-   $A$ is the solar panel area (m$^2$),
+-   $r$ is the panel yield (dimensionless, 0–1), representing manufacturer efficiency (typically $\sim 0.2$),
+-   $PR$ is the performance ratio (dimensionless, 0–1), accounting for site-specific losses (typically $\sim 0.75$),
+-   $H$ is the annual average solar radiation (kWh m$^{-2}$).
+
+Write your function in R; make sure that you add documentation; include default values for *r* and *PR* in the function definition; save the function in a single file to upload to Canvas.
+
+```{r}
+energy_kwh <-
+  function(A,r = 0.2,H,PR = 0.75){
+    E = A * r * H * PR
+    return(E) # store to use later
+  }
+
+# test if function works
+energy_kwh(A = 8, H = 3)
+```
+
+
