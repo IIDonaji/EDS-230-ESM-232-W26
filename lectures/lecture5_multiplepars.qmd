@@ -20,6 +20,7 @@ library(here)
 
 ## This week
 
+<<<<<<< HEAD
 -   before we get to formal sensitivity analysis
 
     -   a bit more practice on data manipulation as part of sensitivity analysis
@@ -32,6 +33,22 @@ Two main classes of sensitivity analysis
 [global:]{style="color:orange;"} simultaneously vary all parameters over possible ranges
 
 [local one at a time:]{style="color:orange;"}hold all other parameters content and then vary one parameter at a time
+=======
+-   before we get to formal sensitivity anbalysis
+
+    -   a bit more practice on data manipulation as part of sensitivity analysis
+    -   building models - making slightly more complex models by adding 'boxes' or submodels 
+    
+## Combined sensitivity analysis
+
+
+Two main classes of sensitivity analysis
+
+<span style="color:orange;">global:</span>
+simultaneously vary all parameters over possible ranges
+
+<span style="color:orange;">local  one at a time:</span>hold all other parameters content and then vary one parameter at a time
+>>>>>>> upstream/main
 
 Global is preferred where possible because it accounts for parameter interactions
 
@@ -56,6 +73,7 @@ Two possible approaches
 
 -   sometimes we think of uncertainty as a range of possible values (min, max), where possibility is defined by physics or expert knowledge
 
+<<<<<<< HEAD
 -   snow albedo can't be greater than 1;
 
 -   can't have negative efficiency;
@@ -67,6 +85,18 @@ Two possible approaches
 -   sometimes we know something about the distribution because we have measurements e.g., efficiency of solar panels measured in lab or field tests; we can use mean and standard deviation to define a normal distribution
 
 -   sometimes we think of uncertainty as percent deviation from our best guess e.g., we think efficiency is 0.2 but could be ±15%
+=======
+* snow albedo can't be greater than 1; 
+* can't have negative efficiency; 
+* tree height limited by hydraulics
+* solar arrays with efficiency less than some value are not marketable
+
+-   sometimes we know something about the distribution because we have measurements
+    e.g., efficiency of solar panels measured in lab or field tests; we can use mean and standard deviation to define a normal distribution
+
+-   sometimes we think of uncertainty as percent deviation from our best guess
+    e.g., we think efficiency is 0.2 but could be ±15%
+>>>>>>> upstream/main
 
 ## Example using *pmap* {.scrollable}
 
@@ -125,8 +155,13 @@ Lets start with mean annual electricity
 
 We want to look at:
 
+<<<<<<< HEAD
 1)  uncertainty in output due to both parameters
 2)  how each parameter influences the results
+=======
+1) uncertainty in output due to both parameters 
+2) how each parameter influences the results
+>>>>>>> upstream/main
 
 ```{r plot_sensitivity, echo=TRUE}
 # plot - pick one of the 2 parameter as a color
@@ -151,11 +186,19 @@ Is variation due to years big or small relative to parameter uncertainty?
 
 There is **uncertainty** in annual electricity due to both parameters and variation across years **sensitivity** to climate
 
+<<<<<<< HEAD
 For complex model outputs and multiple parameters, data structures for analysis and visualization can be tricky - two useful options
 
 1.  Reduce output dimensionality - summarize output e.g mean annual electricity - one value per parameter set
 
 2.  To deal with multiple parameter, add a "key" to identify parameter set - e.g. run number .e.g we will use a parameter id to do this
+=======
+For complex model outputs and multiple parameters, data structures for analysis and visualization can be tricky - two useful options 
+
+1. Reduce output dimensionality - summarize output e.g mean annual electricity - one value per parameter set 
+
+2. To deal with multiple parameter, add a "key" to identify parameter set - e.g. run number .e.g we will use a parameter id to do this
+>>>>>>> upstream/main
 
 ```{r annual_uncertainty, echo=TRUE}
 
@@ -207,6 +250,11 @@ save(solar_annual_elect, file = here("Data/annual_elect_solar.rda"))
 
 ```
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> upstream/main
 # Data structure and Data Manipulation
 
 being able to create data structures to do what you want with model output

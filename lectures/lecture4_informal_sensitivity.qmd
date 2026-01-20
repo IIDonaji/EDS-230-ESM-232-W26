@@ -19,6 +19,8 @@ library(ggpubr)
 library(here)
 ```
 
+
+
 ## What we are learning so far {.scrollable}
 
 How to find the "right" tool for the job
@@ -33,7 +35,7 @@ How to find the "right" tool for the job
 
     -   some parameters impact model transfer function, other I/O formatting
 
-# Answer to visual check
+# Answer to visual check 
 
 # My code to find issue and clean data {.scrollable}
 
@@ -89,7 +91,7 @@ site1 <- solarpv(area = 0.1, solar = sierraczosolar)
 
 ## Playing with models {.scrollable}
 
-::: concept-box
+::: {.concept-box}
 We often build models to try different options
 
 **Model inputs**: solar radiation (daily direct and diffuse)
@@ -101,7 +103,7 @@ We often build models to try different options
 
 How would a lower efficiency impact mean power generated?
 
-*eff* – 0.6 instead of default 0.8
+*eff* – 0.6 instead of default 0.8  
 
 try it
 
@@ -117,18 +119,20 @@ site2$mean
 site1$mean
 site2$mean
 
-# relative difference (new - base / base)
+# relative difference
 (site2$mean-site1$mean)/site1$mean * 100
 
-# or this way relative difference in parameter
+# relative difference in parameter
 (0.6-0.8)/0.8 * 100
 ```
 
+
 ## Informal Sensitivity Analysis {.scrollable}
 
-What happens when we vary parameters? \* Not always obvious when transfer function is non-linear or multi-part
+What happens when we vary parameters?
+  * Not always obvious when transfer function is non-linear or multi-part
 
-**Informal** - just try varying parameters to see what it does
+**Informal** - just try varying parameters
 
 -   decide which parameter(s) and what range to vary the parameter over - what is the uncertainty? (+- 15% )?
 
@@ -137,8 +141,6 @@ What happens when we vary parameters? \* Not always obvious when transfer functi
 -   analyze the sensitivity of the output to variation (simply plotting for now)
 
 ## Helpful tools {.scrollable}
-
-for sensitivity analysis
 
 -   Sampling
 
@@ -192,7 +194,7 @@ eff <- rnorm(mean = 0.6, sd = 0.1, n = 20)
 
 site2 <- eff %>% map(~ solarpv(area = 0.1, 
   solar = sierraczosolar, clr = "green", 
-  eunit = "kWhr", g = FALSE, etype = "direct", eff = .x)) # .x substetud value with the numbers being piped
+  eunit = "kWhr", g = FALSE, etype = "direct", eff = .x))
 
 head(site2)
 ```
@@ -206,22 +208,22 @@ head(site2)
 -   R often returns lists - but not so easy for organization
 
 -   ask yourself what you want to do with the data, then put in a structure that will make this easy
-
--   a data frame is often the best structure for graphing
+  -  a data frame is often the best structure for graphing
 
 -   e.g two different data frames
 
     -   plot variation in mean annual electricity by *eff*
     -   plot variation in each year due to variation in *eff*
+   
 
 ```{r sen1b, eval=T}
 
 head(str(site2))
 # this is pretty messy - but we can extract a useful data structure,lets say we want
 # just the annual data (not the mean annual time series), and then reformat as a data frame with nice column names
-tmp <- map_dfr(site2, `[`, c("annual")) # map_dfr() to extract
+tmp <- map_dfr(site2, `[`, c("annual"))
 
-# convert from tibble to a data frame how do you know its tibble and not a dataframe
+# convert from tibble to a data frame
 site2df <- data.frame(year = tmp$annual$year, elect = tmp$annual$elect)
 head(site2df)
 ```
@@ -258,9 +260,9 @@ ggplot(site2df, aes(year, elect, group = year)) +
 
 **Why?**
 
--   Summarizes parameter uncertainty\
--   Highlights interannual trends\
--   Easier comparison across years
+- Summarizes parameter uncertainty  
+- Highlights interannual trends  
+- Easier comparison across years
 
 ## Plot {.scrollable}
 
@@ -274,7 +276,7 @@ site2_average <- site2df %>%
 ggplot(site2df, aes(year, elect, group = year)) +
   geom_boxplot() +
   labs(y = "Electricity in W") +
-  geom_line(data = site2_average, aes(year, elect, group = 1), col = "orange", lwd=2) # Mean line
+  geom_line(data = site2_average, aes(year, elect, group = 1), col = "orange", lwd=2)
 ```
 
 ## How does efficiency impact mean annual electricity estimate {.scrollable}
@@ -299,10 +301,8 @@ site2_mean <- data.frame(eff = eff, elect = tmp)
 
 -   how variable is the model output given parameter variation
 -   how does the variation in parameter impact model output
-    -   good to always make this graph
 
 ```{r sene2, eval=T, echo=TRUE}
-# variation range first
 ggplot(site2_mean, aes(y = mean)) +
   geom_boxplot(fill="yellow") +
   labs(y = "Electricity in kWhr")
@@ -318,8 +318,8 @@ mean(site2_mean$mean)
 
 # Sensitivity and Uncertainty
 
--   **Sensitivity analysis** is a way to explore how model outputs change when inputs or parameters are varied (how does model change when inputs change)
--   **Uncertainty analysis** is a way to quantify the uncertainty in model outputs due to uncertainty in inputs or parameters (the sensitivity...)
+-   **Sensitivity analysis** is a way to explore how model outputs change when inputs or parameters are varied
+-   **Uncertainty analysis** is a way to quantify the uncertainty in model outputs due to uncertainty in inputs or parameters
 
 Sensitivity is more general - and the first step in uncertainty analysis, but also useful for answering model questions - is exposure to pollutants sensitivity to changes in climate inputs
 
@@ -334,46 +334,3 @@ Sensitivity is more general - and the first step in uncertainty analysis, but al
 Learn to "play" with models
 
 # Assignment 3
-
-Lab
-
-```{r}
-library(tidyverse)
-
-
-ethresh <- rnorm(mean = 10000, sd = 0.15, n = 20)
-
-
-param <- ethresh %>% map(~ solarpv(area = 0.1, 
-  solar = sierraczosolar, clr = "green", 
-  eunit = "W", g = FALSE, etype = "direct",eff = 0.8,  ethresh = .x)) # .x substituted value with the numbers being piped
-
-head(param)
-```
-
-
-```{r}
-head(str(param))
-# this is pretty messy - but we can extract a useful data structure,lets say we want
-# just the annual data (not the mean annual time series), and then reformat as a data frame with nice column names
-tmp <- map_dfr(param, `[`, c("annual")) # map_dfr() to extract
-
-# convert from tibble to a data frame how do you know its tibble and not a dataframe
-paramdf <- data.frame(year = tmp$annual$year, elect = tmp$annual$elect)
-head(paramdf)
-
-# plot
-# we also might want an average across parameter uncertainty
-param_average <- paramdf %>%
-  group_by(year) %>%
-  dplyr::summarize(elect = mean(elect))
-
-# now add this to the plot - note that we remove the grouping by using group=1
-ggplot(paramdf, aes(year, elect, group = year)) +
-  geom_boxplot() +
-  labs(y = "...") +
-  geom_line(data = param_average, aes(year, elect, group = 1), col = "orange", lwd=2) # Mean line
-```
-```
-
-
