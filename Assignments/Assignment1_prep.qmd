@@ -49,6 +49,17 @@ Write your function in R; make sure that you add documentation; include default 
 
 You don't need to submit anything for the Lisa Felman Barrett blog - just think about the inverse inference problem in the context of the environment. We will discuss next class
 
+
+```{r}
+energy_kwh <
+function(A,r = 0.2,H,PR = 0.75){
+E = A * r * H * PR
+return(E) # store to use later
+}
+# test if function works
+energy_kwh(A = 8, H = 3)
+```
+
 ### *Grading Rubric*
 
 -   Completed Survey (10 pts total)
