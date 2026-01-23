@@ -1,0 +1,112 @@
+---
+title: "Assignment 3: Almond Yield"
+format: pdf
+editor: visual
+---
+
+## Conceptual Model Diagram
+
+┌─────────────────────────────────────────────────┐
+│              INPUTS                             │
+├─────────────────────────────────────────────────┤
+│ Daily Climate Data:                             │
+│  - Tmin: Minimum temperature (°C)               │
+│  - Tmax: Maximum temperature (°C)               │
+│  - P: Precipitation (mm)                        │
+│  - Date: day, month, year                       │
+└─────────────────────────────────────────────────┘
+                      ↓
+┌─────────────────────────────────────────────────┐
+│            PROCESSING                           │
+├─────────────────────────────────────────────────┤
+│ Step 1: Aggregate daily → monthly              │
+│  - Monthly mean Tmin                            │
+│  - Monthly total precipitation                  │
+│                                                 │
+│ Step 2: Extract specific months                │
+│  - Tn,2 = February mean minimum temp (°C)      │
+│  - P1 = January total precipitation (mm)       │
+│                                                 │
+│ Step 3: Apply model equation                   │
+│  Y = -0.015·Tn,2 - 0.0046·Tn,2² - 0.07·P1 +   │
+│      0.0043·P1² + 0.28                         │
+└─────────────────────────────────────────────────┘
+                      ↓
+┌─────────────────────────────────────────────────┐
+│            PARAMETERS                           │
+├─────────────────────────────────────────────────┤
+│ From Lobell et al. Table 2 (Almonds):          │
+│  β1 = -0.015                                    │
+│  β2 = -0.0046                                   │
+│  β3 = -0.07                                     │
+│  β4 = 0.0043                                    │
+│  Intercept = 0.28                               │
+└─────────────────────────────────────────────────┘
+                      ↓
+┌─────────────────────────────────────────────────┐
+│             OUTPUTS                             │
+├─────────────────────────────────────────────────┤
+│ Annual Yield Anomalies (ton/acre):              │
+│  - Maximum yield anomaly                        │
+│  - Minimum yield anomaly                        │
+│  - Mean yield anomaly                           │
+│  - Time series of all years                     │
+└─────────────────────────────────────────────────┘
+## WORKFLOW:
+1. Load required packages and functions
+2. Read climate data
+3. Run the almond yield model
+4. Display and visualize results
+
+```{r}
+# Load required packages
+library(dplyr)
+library(ggplot2)
+```
+
+# Source the almond model function
+# NOTE: Update path to where you saved the function file
+source("almond_yield_function.R")
+
+Read the climate data file
+#Assumes clim.txt is in the working directory
+```{r}
+clim_data <- read.table("clim.txt", header = TRUE)
+```
+
+
+# Inspect the data structure
+
+```{r}
+str(clim_data)
+head(clim_data)
+summary(clim_data)
+```
+
+# STEP 2: RUN THE ALMOND YIELD MODEL
+
+# Calculate yield anomalies and summary statistics
+```{r}
+results <- almond_yield_summary(clim_data)
+```
+
+# STEP 3: DISPLAY RESULTS
+
+```{r}
+# Print summary statistics
+max_yield <- max(results$yield_anomaly)
+min_yield <- min(results$yield_anomaly)
+mean_yield <- mean(results$yield_anomaly)
+
+cat("Maximum yield anomaly:", max_yield, "ton/acre\n")
+cat("Minimum yield anomaly:", min_yield, "ton/acre\n")
+cat("Mean yield anomaly:", mean_yield, "ton/acre\n")
+```
+
+
+```{r}
+# Display annual results table
+cat("ANNUAL YIELD ANOMALIES:\n")
+cat("------------------------\n")
+print(results$full_results, n = 20)
+```
